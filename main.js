@@ -82,23 +82,29 @@ stopBtn.addEventListener('click', () => {
 });
 // ダメージ計算式 (AI)
 function DMcalc(attackerId, gap, diff) {
-    // a: 攻撃側の5秒からの誤差 (絶対値)
-    const a = Math.abs(gap[attackerId]);
-    
-    // 基本ダメージ: 誤差が0のとき最大30、誤差が1.0秒で10になる放物線
-    // 式: 30 - (20 * 誤差)
-    // 0.5秒の誤差なら 30 - 10 = 20ダメージ
-    let baseDamage = 30 - (20 * a);
-
-    // 最低ダメージ保証 (あまりにズレすぎても5ダメージは与える)
-    if (baseDamage < 5) baseDamage = 5;
-
-    // 精度差ボーナス (相手よりどれだけ優れていたか)
-    // 最大+10ダメージのボーナスを加算
-    const advantage = Math.abs(diff); 
-    const bonus = Math.min(advantage * 10, 10); 
-
-    return baseDamage + bonus;
+    const time = Math.abs(gap[attackerId]);
+    const opponentError = Math.abs(gap[1 - attackerId]);
+    let damage = 0;
+    // ダメージテーブル
+    if (time === 0) {
+        damage = 80;
+    } 
+    else if (time <= 0.01) {
+        damage = 50;
+    } 
+    else if (time <= 0.05) {
+        damage = 20;
+    } 
+    else if (time <= 1.00) {
+        damage = 15;
+    } 
+    else {
+        damage = 5;
+    }
+    if (Math.abs(time - opponentError) <= 0.01 && time > 0) {
+        return 0;
+    }
+    return damage;
 }
 // 勝敗判定
 function judge(loserId) {
