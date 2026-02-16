@@ -12,6 +12,7 @@
     border : none;
     background-color: #248eff;
     color: #fff;
+    margin-top: 2rem;
 }
 .btn:hover {
     background-color: #007bff;
@@ -40,6 +41,7 @@ body {
     color: #fff000;
     margin-top: -4rem;
     margin-inline: 5px;
+    width: 300px;
 }
 .goal p {
     padding: 20px;
