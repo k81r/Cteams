@@ -73,13 +73,18 @@ stopBtn.addEventListener('click', () => {
     turn = (turn + 1) % 2;
 });
 
-// ダメージ計算式 (AI)
+// ダメージ計算式
 function DMcalc(attackerIdx, gap, diff) {
-    const time = Math.abs(gap[attackerIdx]);
-    const opponentError = Math.abs(gap[1 - attackerIdx]);
+    const time = Math.abs(gap[attackerIdx]); // 自分
+    const opponentError = Math.abs(gap[1 - attackerIdx]); // 相手
     let damage = 0;
 
-    // ダメージテーブルの実装
+    //互いの誤差が0.00の場合　互いに80ダメージ
+    if (time === opponentError) {
+        return 80;
+    }
+
+    //ダメージ判定
     if (time === 0) {
         damage = 80;
     } else if (time <= 0.01) {
@@ -90,12 +95,6 @@ function DMcalc(attackerIdx, gap, diff) {
         damage = 15;
     } else {
         damage = 5;
-    }
-
-    // 苦戦要素：相手との誤差の差が0.01秒以内ならダメージを0にする（相殺）
-    // ただし、自分が0.00秒（time === 0）の場合は相殺を貫通する
-    if (Math.abs(time - opponentError) <= 0.01 && time > 0) {
-        return 0;
     }
 
     return damage;
