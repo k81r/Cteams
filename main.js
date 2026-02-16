@@ -54,7 +54,7 @@ stopBtn.addEventListener('click', () => {
             damage = Number(DMcalc(0, gap, diff).toFixed(0));   // DMcalc関数の戻り値の小数点第一位を四捨五入
             console.log("1p-attack:" + damage + "damage");    //確認用
             p2_hp -= damage;
-            if (p2_hp < 0) judge(0);
+            if (p2_hp <= 0) judge(1);
             setTimeout(() => {
                 document.getElementById("p2-hp").style.width = p2_hp + "%"; 
             }, 500); //体力のCSSに反映
