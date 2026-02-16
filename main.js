@@ -38,6 +38,7 @@ stopBtn.addEventListener('click', () => {
     const record = mainDisplay.textContent;
     player[turn].textContent = record;
 
+
     // ５秒との差の小数点第三位を四捨五入した値を格納
     gap[turn] = Number((record - 5).toFixed(2));
 
@@ -53,16 +54,32 @@ stopBtn.addEventListener('click', () => {
             damage = Number(DMcalc(0, gap, diff).toFixed(0));   // DMcalc関数の戻り値の小数点第一位を四捨五入
             console.log("1p-attack:" + damage + "damage");    //確認用
             p2_hp -= damage;
+<<<<<<< Updated upstream
             if (p2_hp <= 0) judge(1);
             document.getElementById("p2-hp").style.width = p2_hp + "%";     //体力のCSSに反映
+=======
+            if (p2_hp < 0) p2_hp = 0;
+            setTimeout(() => {
+                document.getElementById("p2-hp").style.width = p2_hp + "%"; 
+            }, 500); //体力のCSSに反映
+            document.querySelector('#comment').textContent = "1Pの攻撃！";
+>>>>>>> Stashed changes
         }
         else if (diff >= 0) {
             // 2pの攻撃
             damage = Number(DMcalc(1, gap, diff).toFixed(0));
             console.log("2p-attack:" + damage + "damage");
             p1_hp -= damage;
+<<<<<<< Updated upstream
             if (p1_hp <= 0) judge(0);
             document.getElementById("p1-hp").style.width = p1_hp + "%";
+=======
+            if (p1_hp < 0) p1_hp = 0;
+            setTimeout(() => {
+                document.getElementById("p1-hp").style.width = p1_hp + "%";
+            }, 500);
+            document.querySelector('#comment').textContent = "2Pの攻撃！";
+>>>>>>> Stashed changes
         }
         else {
             // 引き分け

@@ -137,3 +137,14 @@ body {
 .stopwatch button:hover {
     background-color: #5a5a5a;
 }
+.commentarea{
+    text-align: center;
+    color: #fff;
+    padding: 10px;
+    margin: 10px 200px;
+    border: solid #919191 10px;
+    background-color: #000000;
+    border-radius: 50px;
+    box-shadow: 10px 10px #00000098;
+    height: 200px;
+}
