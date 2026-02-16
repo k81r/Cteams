@@ -53,7 +53,7 @@ stopBtn.addEventListener('click', () => {
             damage = Number(DMcalc(0, gap, diff).toFixed(0));   // DMcalc関数の戻り値の小数点第一位を四捨五入
             console.log("1p-attack:" + damage + "damage");    //確認用
             p2_hp -= damage;
-            if (p2_hp < 0) p2_hp = 0;
+            if (p2_hp <= 0) judge(1);
             document.getElementById("p2-hp").style.width = p2_hp + "%";     //体力のCSSに反映
         }
         else if (diff >= 0) {
@@ -61,7 +61,7 @@ stopBtn.addEventListener('click', () => {
             damage = Number(DMcalc(1, gap, diff).toFixed(0));
             console.log("2p-attack:" + damage + "damage");
             p1_hp -= damage;
-            if (p1_hp < 0) p1_hp = 0;
+            if (p1_hp <= 0) judge(0);
             document.getElementById("p1-hp").style.width = p1_hp + "%";
         }
         else {
@@ -69,14 +69,14 @@ stopBtn.addEventListener('click', () => {
             damage = 0;
         }
     }
+        
     // プレイヤー切り替え
     turn = (turn + 1) % 2;
 });
-
 // ダメージ計算式 (AI)
-function DMcalc(attackerIdx, gap, diff) {
+function DMcalc(attackerId, gap, diff) {
     // a: 攻撃側の5秒からの誤差 (絶対値)
-    const a = Math.abs(gap[attackerIdx]);
+    const a = Math.abs(gap[attackerId]);
     
     // 基本ダメージ: 誤差が0のとき最大30、誤差が1.0秒で10になる放物線
     // 式: 30 - (20 * 誤差)
@@ -92,4 +92,8 @@ function DMcalc(attackerIdx, gap, diff) {
     const bonus = Math.min(advantage * 10, 10); 
 
     return baseDamage + bonus;
+}
+// 勝敗判定
+function judge(loserId) {
+    document.getElementById(`${loserId}`).style.width = 0 + "%";
 }
