@@ -1,3 +1,15 @@
+//name
+window.addEventListener("DOMContentLoaded", () => {
+
+    const player1Name = localStorage.getItem("player1") || "player1";
+    const player2Name = localStorage.getItem("player2") || "player2";
+
+    const p1name = document.getElementById("p1name");
+    const p2name = document.getElementById("p2name");
+
+    if (p1name) p1name.textContent = player1Name;
+    if (p2name) p2name.textContent = player2Name;
+});
 // DOM取得
 const startBtn = document.getElementById("startbtn");
 const stopBtn = document.getElementById("stopbtn");
@@ -90,7 +102,7 @@ stopBtn.addEventListener('click', () => {
     turn = (turn + 1) % 2;
     mainDisplay.classList.remove("hidden-timer"); // タイマーを表示状態に戻す
 });
-// ダメージ計算式 (AI)
+// ダメージ計算式
 function DMcalc(attackerId, gap, diff) {
     const time = Math.abs(gap[attackerId]);
     const opponentError = Math.abs(gap[1 - attackerId]);
