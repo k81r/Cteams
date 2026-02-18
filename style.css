@@ -118,6 +118,10 @@ body {
     flex-direction: column;
     margin-top: 1.5rem;
     align-items: center;
+    width: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .stopwatch div {
     text-align: center;
@@ -125,7 +129,7 @@ body {
     font-weight: 450;
     font-style: normal;
     font-size: 70px;
-    width: 300px;
+    width: 200px;
     padding-block: 56px;
     border-radius: 100%;
     box-shadow: 0px 2px 15px #00000098;
@@ -143,32 +147,12 @@ body {
     background-color: #5a5a5a;
 }
 .time {
-    font-family: "WDXL Lubrifont JP N", monospace; /* monospaceを予備に追加 */
-    font-weight: 400;
-    font-style: normal;
-    font-size: 70px;
-
-    /* 数字の幅を等間隔（テーブル状）に固定する */
     font-variant-numeric: tabular-nums;
-    
-    /* 万が一上記が効かないフォントのための保険 */
     display: inline-block;
     text-align: center;
 }
-/* 中央のメインストップウォッチの幅を固定 */
-#stopwatch {
-    width: 350px; /* 数字が4つ並んでも余裕のある幅 */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-/* 左右のプレイヤータイムの幅も固定してガタつきを抑える */
-#p1time, #p2time {
-    min-width: 220px;
-    display: inline-block;
-}
-/* 2秒を過ぎた時に適用するクラス */
-/* 文字だけを透明にする設定 */
+
+
 .hidden-timer {
     color: transparent !important; /* 文字色を透明にする */
     transition: color 0.5s;        /* ふわっと消える効果 */
