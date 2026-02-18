@@ -12,42 +12,40 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="play-header">
-        <div class="p1-area">
-        <h2 id="p1name">PLAYER 1</h2>
-          <div class="HPbar">
-          <div id="p1-hp"></div>
+    <section class="background">
+        <div class="play-header">
+            <div class="p1-area">
+                <h2 id="p1name">PLAYER 1</h2>
+                    <div class="HPbar">
+                        <div id="p1-hp"></div>
+                    </div>
+            </div> 
+            <div id="goal" class="goal">
+                <p id="goal-time">05.00</p>
+            </div>
+            <div class="p2-area">
+                <h2 id="p2name">PLAYER 2</h2>
+                <div class="HPbar">
+                    <div id="p2-hp"></div>
+                </div>
+            </div>
         </div>
-        </div> 
-
-        <div id="goal" class="goal">
-          <p id="goal-time">05.00</p>
+        <div class="play-area">
+            <div class="player-display">
+                <div id="p1time" class="time">00.00</div>
+                <img class="character" src="img/player1.png" alt="">
+            </div>
+            <div id="center" class="stopwatch">
+                <div id="stopwatch" class="time">00.00</div>
+                <button id="startbtn">スタート</button>
+                <button id="stopbtn" disabled>ストップ</button>
+            </div>
+            <div class="player-display">
+                <div id="p2time" class="time">00.00</div>
+                <img class="character" src="img/player2.png" alt="">
+            </div>
         </div>
-
-        <div class="p2-area">
-         <h2 id="p2name">PLAYER 2</h2>
-         <div class="HPbar">
-        <div id="p2-hp"></div>
-        </div>
-        </div>
-    </div>
-    <div class="play-area">
-        <div class="player-display">
-            <img class="character" src="img/player1.png" alt="">
-            <div id="p1time" class="time">00.00</div>
-        </div>
-        <div id="center" class="stopwatch">
-            <div id="stopwatch" class="time">00.00</div>
-            <button id="startbtn">スタート</button>
-            <button id="stopbtn" disabled>ストップ</button>
-        </div>
-        <div class="player-display">
-            <img class="character" src="img/player2.png" alt="">
-            <div id="p2time" class="time">00.00</div>
-        </div>
-    </div>
-    <br>
-    <br>
+    </section>
     <div class="commentarea">
         <p id="comment1"></p>
         <p id="comment2"></p>
