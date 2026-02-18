@@ -84,7 +84,7 @@ function DMcalc(attackerIdx, gap, diff) {
         return 80;
     }
 
-    //ダメージ判定
+    //ダメージ判定//
     if (time === 0) {
         damage = 80;
     } else if (time <= 0.01) {
