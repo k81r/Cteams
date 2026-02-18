@@ -31,6 +31,7 @@ body {
     margin-right: auto;
     margin-left: auto;
     max-width: 1500px;
+    height: 144px;
 }
 .goal {
     text-align: center;
@@ -105,6 +106,8 @@ body {
     margin-top: .5rem;
     display: flex;
     justify-content: space-around;
+    height: 50vh;
+    align-items: center;
 }
 .character {
     max-width: 200px;
@@ -137,7 +140,7 @@ body {
     background-color: #fff;
 }
 .stopwatch button:hover {
-    background-color: #5a5a5a;
+    background-color: #e2e2e2;
 }
 .commentarea{
     text-align: center;
