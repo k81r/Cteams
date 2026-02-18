@@ -19,8 +19,8 @@
                 <div id="p1-hp"></div>
             </div>
         </div>
-        <div class="goal">
-            <p>05.00</p>
+        <div id="goal" class="goal">
+            <p id="goal-time">05.00</p>
         </div>
         <div class="p2-area">
             <h2>PLAYER 2</h2>
@@ -31,18 +31,23 @@
     </div>
     <div class="play-area">
         <div>
-            <img class="character" src="img/zakosi.jpg" alt="">
+            <img class="character" src="img/player1.png" alt="">
             <div id="p1time" class="time">00.00</div>
         </div>
-        <div class="stopwatch">
+        <div id="center" class="stopwatch">
             <div id="stopwatch" class="time">00.00</div>
             <button id="startbtn">スタート</button>
             <button id="stopbtn" disabled>ストップ</button>
         </div>
         <div>
-            <img class="character" src="img/go-jasu.jpg" alt="">
+            <img class="character" src="img/player2.png" alt="">
             <div id="p2time" class="time">00.00</div>
         </div>
+    </div>
+    <br>
+    <br>
+    <div class="commentarea">
+        <p id="comment"></p>
     </div>
     <script src="main.js"></script>
 </body>
