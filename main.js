@@ -13,11 +13,20 @@ let p2_hp = 100;
 
 // タイマー更新
 function updateTime() {
-    const now = new Date(Date.now() - startTime);     // 現在時刻 - 開始時刻
-    const s = String(now.getSeconds()).padStart(2, '0');   // 1 → 01 にする
-    const ms = String(Math.floor(now.getMilliseconds() / 10)).padStart(2, '0');     // ミリ秒/10を整数化
+    const elapsedMs = Date.now() - startTime; // 経過ミリ秒
+    const now = new Date(elapsedMs);
+    const s = String(now.getSeconds()).padStart(2, '0');
+    const ms = String(Math.floor(now.getMilliseconds() / 10)).padStart(2, '0');
     
-    mainDisplay.textContent = `${s}.${ms}`; // タイムを表示
+    mainDisplay.textContent = `${s}.${ms}`;
+
+    // 2000ミリ秒（2秒）を過ぎたら hidden-timer クラスをつける
+    if (elapsedMs > 2000) {
+        mainDisplay.classList.add("hidden-timer");
+    } else {
+        // 2秒以下のときは見えるようにしておく（リスタート時用）
+        mainDisplay.classList.remove("hidden-timer");
+    }
 }
 
 // スタートボタン
@@ -71,6 +80,7 @@ stopBtn.addEventListener('click', () => {
     }
     // プレイヤー切り替え
     turn = (turn + 1) % 2;
+    mainDisplay.classList.remove("hidden-timer"); // タイマーを表示状態に戻す
 });
 
 // ダメージ計算式 (AI)
