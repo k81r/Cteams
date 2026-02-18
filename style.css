@@ -1,8 +1,10 @@
-.GameSelect {
-    text-align: center;
+html {
     max-width: 1500px;
     margin-right: auto;
     margin-left: auto;
+}
+.GameSelect {
+    text-align: center;
     padding-top: 20vh;
 }
 .PlayerOption {
@@ -165,7 +167,7 @@ body {
     text-align: center;
     color: #fff;
     padding: 10px;
-    margin: 10px 200px;
+    margin: 10px;
     border: solid #919191 10px;
     background-color: #000000;
     border-radius: 50px;
