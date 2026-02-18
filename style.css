@@ -144,13 +144,13 @@ body {
     background-color: #fff;
 }
 .stopwatch button:hover {
-    background-color: #5a5a5a;
+    background-color: #dddddd;
 }
 .time {
     font-variant-numeric: tabular-nums;
     display: inline-block;
 }
-.comentarea {
+.commentarea {
     text-align: center;
     color: #fff;
     padding: 10px;
@@ -159,5 +159,9 @@ body {
     background-color: #000000;
     border-radius: 50px;
     box-shadow: 10px 10px #00000098;
-    height: 100px;
+    height: 200px;
+}
+.hidden-timer {
+    color: transparent !important; /* 文字色を透明にする */
+    transition: color 0.5s;        /* ふわっと消える効果 */
 }
