@@ -90,7 +90,7 @@ stopBtn.addEventListener('click', () => {
     turn = (turn + 1) % 2;
     mainDisplay.classList.remove("hidden-timer"); // タイマーを表示状態に戻す
 });
-// ダメージ計算式 (AI)
+// ダメージ計算式
 function DMcalc(attackerId, gap, diff) {
     const time = Math.abs(gap[attackerId]);
     const opponentError = Math.abs(gap[1 - attackerId]);
