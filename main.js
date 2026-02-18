@@ -67,7 +67,8 @@ stopBtn.addEventListener('click', () => {
             setTimeout(() => {
                 document.getElementById("p2-hp").style.width = p2_hp + "%"; 
             }, 500); //体力のCSSに反映
-            document.querySelector('#comment').textContent = "1Pの攻撃！";
+            document.querySelector('#comment1').textContent = "1Pの攻撃！";
+            document.querySelector('#comment2').textContent = "2Pに" + damage + "ダメージ！";
         }
         else if (diff >= 0) {
             // 2pの攻撃
@@ -78,7 +79,8 @@ stopBtn.addEventListener('click', () => {
             setTimeout(() => {
                 document.getElementById("p1-hp").style.width = p1_hp + "%";
             }, 500);
-            document.querySelector('#comment').textContent = "2Pの攻撃！";
+            document.querySelector('#comment1').textContent = "2Pの攻撃！";
+            document.querySelector('#comment2').textContent = "1Pに" + damage + "ダメージ！";
         }
         else {
             // 引き分け
