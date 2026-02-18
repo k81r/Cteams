@@ -12,15 +12,31 @@
         <p>”ゲームの説明”</p>
         <div class="PlayerOption">
             <div>
-                <label>1Pネーム：<input type="text" value="Player1"></label>
+                <label>1Pネーム：
+                    <input type="text" id="player1" value="player1"></label>
                 <div>”キャラクター選択画面”</div>
             </div>
             <div>
-                <label>2Pネーム：<input type="text" value="Player2"></label>
+                <label>2Pネーム：
+                    <input type="text" id="player2" value="player2"></label>
                 <div>”キャラクター選択画面”</div>
             </div>
         </div>
-        <a href="game.html"><input class="btn" type="button" value="ゲームスタート"></a>
+        <button id="startBtn" class="btn">ゲームスタート</button>
     </div>
+
+    <script>
+    document.getElementById("startBtn").addEventListener("click", function(){
+
+    const p1 = document.getElementById("player1").value;
+    const p2 = document.getElementById("player2").value;
+
+    localStorage.setItem("player1", p1);
+    localStorage.setItem("player2", p2);
+
+    window.location.href = "game.html";
+});
+</script>
+
 </body>
 </html>

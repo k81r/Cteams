@@ -1,3 +1,15 @@
+//name
+window.addEventListener("DOMContentLoaded", () => {
+
+    const player1Name = localStorage.getItem("player1") || "player1";
+    const player2Name = localStorage.getItem("player2") || "player2";
+
+    const p1name = document.getElementById("p1name");
+    const p2name = document.getElementById("p2name");
+
+    if (p1name) p1name.textContent = player1Name;
+    if (p2name) p2name.textContent = player2Name;
+});
 // DOM取得
 const startBtn = document.getElementById("startbtn");
 const stopBtn = document.getElementById("stopbtn");
