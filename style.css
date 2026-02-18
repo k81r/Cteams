@@ -1,5 +1,5 @@
 html {
-    max-width: 1500px;
+    max-width: 1700px;
     margin-right: auto;
     margin-left: auto;
 }
@@ -25,9 +25,13 @@ html {
 }
 
 /*ゲーム画面*/
-body {
-    background-image: url(#);
-    background-size: cover;
+.background {
+    margin-bottom: 1rem;
+    background: no-repeat url(img/ringu.jpg) center center;
+    padding: 30px;
+    border: solid #919191 10px;
+    border-radius: 50px;
+    box-shadow: 0px 10px 10px #00000098;
 }
 .play-header {
     display: flex;
@@ -107,8 +111,9 @@ body {
     background-color: #3d3dfc;
     width: 100%;
 }
-
 .play-area {
+    margin-right: auto;
+    margin-left: auto;
     margin-top: .5rem;
     display: flex;
     justify-content: space-around;
@@ -137,6 +142,7 @@ body {
 }
 .stopwatch div {
     text-align: center;
+    background-color: #fff;
     font-family: "WDXL Lubrifont JP N", sans-serif;
     font-weight: 450;
     font-style: normal;
@@ -166,13 +172,11 @@ body {
 .commentarea {
     text-align: center;
     color: #fff;
-    padding: 10px;
-    margin: 10px;
     border: solid #919191 10px;
     background-color: #000000;
     border-radius: 50px;
-    box-shadow: 10px 10px #00000098;
-    height: 200px;
+    box-shadow: 0px 10px 10px #00000098;
+    height: 250px;
 }
 .hidden-timer {
     color: transparent !important; /* 文字色を透明にする */
