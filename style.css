@@ -31,6 +31,7 @@ body {
     margin-right: auto;
     margin-left: auto;
     max-width: 1500px;
+    height: 144px;
 }
 .goal {
     text-align: center;
@@ -105,6 +106,8 @@ body {
     margin-top: .5rem;
     display: flex;
     justify-content: space-around;
+    height: 50vh;
+    align-items: center;
 }
 .character {
     max-width: 200px;
@@ -115,11 +118,15 @@ body {
     flex-direction: column;
     margin-top: 1.5rem;
     align-items: center;
+    width: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .stopwatch div {
     text-align: center;
     font-family: "WDXL Lubrifont JP N", sans-serif;
-    font-weight: 400;
+    font-weight: 450;
     font-style: normal;
     font-size: 70px;
     width: 200px;
@@ -139,7 +146,11 @@ body {
 .stopwatch button:hover {
     background-color: #5a5a5a;
 }
-.commentarea{
+.time {
+    font-variant-numeric: tabular-nums;
+    display: inline-block;
+}
+.comentarea {
     text-align: center;
     color: #fff;
     padding: 10px;

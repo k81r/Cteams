@@ -9,15 +9,24 @@ let timerId;
 let turn = 0;   // 0 => 1p, 1 => 2p
 let gap = [ 0, 0 ];   // 5秒との時間差を入れる用
 let p1_hp = 100;
-let p2_hp = 10;
+let p2_hp = 1;
 
 // タイマー更新
 function updateTime() {
-    const now = new Date(Date.now() - startTime);     // 現在時刻 - 開始時刻
-    const s = String(now.getSeconds()).padStart(2, '0');   // 1 → 01 にする
-    const ms = String(Math.floor(now.getMilliseconds() / 10)).padStart(2, '0');     // ミリ秒/10を整数化
+    const elapsedMs = Date.now() - startTime; // 経過ミリ秒
+    const now = new Date(elapsedMs);
+    const s = String(now.getSeconds()).padStart(2, '0');
+    const ms = String(Math.floor(now.getMilliseconds() / 10)).padStart(2, '0');
     
-    mainDisplay.textContent = `${s}.${ms}`; // タイムを表示
+    mainDisplay.textContent = `${s}.${ms}`;
+
+    // 2000ミリ秒（2秒）を過ぎたら hidden-timer クラスをつける
+    if (elapsedMs > 2000) {
+        mainDisplay.classList.add("hidden-timer");
+    } else {
+        // 2秒以下のときは見えるようにしておく（リスタート時用）
+        mainDisplay.classList.remove("hidden-timer");
+    }
 }
 
 // スタートボタン
@@ -55,8 +64,6 @@ stopBtn.addEventListener('click', () => {
             console.log("1p-attack:" + damage + "damage");    //確認用
             p2_hp -= damage;
             if (p2_hp <= 0) judge(1);
-            document.getElementById("p2-hp").style.width = p2_hp + "%";     //体力のCSSに反映
-            if (p2_hp < 0) p2_hp = 0;
             setTimeout(() => {
                 document.getElementById("p2-hp").style.width = p2_hp + "%"; 
             }, 500); //体力のCSSに反映
@@ -68,8 +75,6 @@ stopBtn.addEventListener('click', () => {
             console.log("2p-attack:" + damage + "damage");
             p1_hp -= damage;
             if (p1_hp <= 0) judge(0);
-            document.getElementById("p1-hp").style.width = p1_hp + "%";
-            if (p1_hp < 0) p1_hp = 0;
             setTimeout(() => {
                 document.getElementById("p1-hp").style.width = p1_hp + "%";
             }, 500);
@@ -83,33 +88,40 @@ stopBtn.addEventListener('click', () => {
         
     // プレイヤー切り替え
     turn = (turn + 1) % 2;
+    mainDisplay.classList.remove("hidden-timer"); // タイマーを表示状態に戻す
 });
 // ダメージ計算式 (AI)
 function DMcalc(attackerId, gap, diff) {
-    // a: 攻撃側の5秒からの誤差 (絶対値)
-    const a = Math.abs(gap[attackerId]);
-    
-    // 基本ダメージ: 誤差が0のとき最大30、誤差が1.0秒で10になる放物線
-    // 式: 30 - (20 * 誤差)
-    // 0.5秒の誤差なら 30 - 10 = 20ダメージ
-    let baseDamage = 30 - (20 * a);
-
-    // 最低ダメージ保証 (あまりにズレすぎても5ダメージは与える)
-    if (baseDamage < 5) baseDamage = 5;
-
-    // 精度差ボーナス (相手よりどれだけ優れていたか)
-    // 最大+10ダメージのボーナスを加算
-    const advantage = Math.abs(diff); 
-    const bonus = Math.min(advantage * 10, 10); 
-
-    return baseDamage + bonus;
+    const time = Math.abs(gap[attackerId]);
+    const opponentError = Math.abs(gap[1 - attackerId]);
+    let damage = 0;
+    // ダメージテーブル
+    if (time === 0) {
+        damage = 80;
+    } 
+    else if (time <= 0.01) {
+        damage = 50;
+    } 
+    else if (time <= 0.05) {
+        damage = 20;
+    } 
+    else if (time <= 1.00) {
+        damage = 15;
+    } 
+    else {
+        damage = 5;
+    }
+    if (Math.abs(time - opponentError) <= 0.01 && time > 0) {
+        return 0;
+    }
+    return damage;
 }
 // 勝敗判定
 function judge(loserId) {
     document.getElementById(`p${++loserId}-hp`).style.width = 0 + "%";
     document.getElementById("goal-time").textContent = "K.O";
     center = document.getElementById('center');
-    center.innerHTML = '<input id="restart" class="btn" type="button" value="もう一戦"><input id="quit" class="btn" type="button" value="やめる">';
+    center.innerHTML = '<input id="restart" class="btn" type="button" value="もう一戦"><a href="top.html"><input id="quit" class="btn" type="button" value="やめる"></a>';
     restart.addEventListener('click', () => {location.reload()});   //ページを再読み込み
-    puit.addEventListener('click', () => {});       //ゲームトップに戻る
+
 }
