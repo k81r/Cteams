@@ -149,11 +149,15 @@ body {
 .time {
     font-variant-numeric: tabular-nums;
     display: inline-block;
-    text-align: center;
 }
-
-
-.hidden-timer {
-    color: transparent !important; /* 文字色を透明にする */
-    transition: color 0.5s;        /* ふわっと消える効果 */
+.comentarea {
+    text-align: center;
+    color: #fff;
+    padding: 10px;
+    margin: 10px 200px;
+    border: solid #919191 10px;
+    background-color: #000000;
+    border-radius: 50px;
+    box-shadow: 10px 10px #00000098;
+    height: 100px;
 }
