@@ -129,6 +129,14 @@ html {
     flex-direction: column;
     align-items: center;
     gap: 10px;
+
+    /*変更箇所*/
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border: solid #919191 5px;
+    border-radius: 30px;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
+    min-width: 250px;
 }
 .stopwatch {
     display: flex;
@@ -153,10 +161,11 @@ html {
     box-shadow: 0px 2px 15px #00000098;
 }
 .stopwatch button {
+    font-family: "WDXL Lubrifont JP N", sans-serif;
     margin-top: 1rem;
     box-shadow: 0px 2px 15px #00000098;
-    width: 100px;
-    height: 40px;
+    width: 300px;
+    height: 100px;
     border-radius: 200px;
     border: none;
     background-color: #fff;
@@ -164,10 +173,19 @@ html {
 .stopwatch button:hover {
     background-color: #dddddd;
 }
-.time {
+.player_time {
+    font-family: "WDXL Lubrifont JP N", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 70px;
     font-variant-numeric: tabular-nums;
     display: inline-block;
     text-align: center;
+    background-color: #000;
+    /*変更箇所*/
+    color: #fff;
+    padding: 5px 15px;
+    border-radius: 10px;
 }
 .commentarea {
     text-align: center;
