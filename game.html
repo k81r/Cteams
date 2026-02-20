@@ -33,7 +33,7 @@
         <div class="play-area">
             <div class="player-display">
                 <div id="p1time" class="time">00.00</div>
-                <img class="character" src="img/player1.png" alt="">
+                <img id="p1-char-img" class="character" src="img/player1.png" alt="1Pキャラ">
             </div>
             <div id="center" class="stopwatch">
                 <div id="stopwatch" class="time">00.00</div>
@@ -42,7 +42,7 @@
             </div>
             <div class="player-display">
                 <div id="p2time" class="time">00.00</div>
-                <img class="character" src="img/player2.png" alt="">
+                <img id="p2-char-img" class="character" src="img/player2.png" alt="2Pキャラ">
             </div>
         </div>
     </section>
@@ -51,20 +51,27 @@
         <p id="comment2"></p>
     </div>
     
-     <script>
+    <script>
     document.addEventListener("DOMContentLoaded", function(){
+        // topから選択した写真を取得
+        const p1NameData = localStorage.getItem("player1") || "PLAYER 1";
+        const p2NameData = localStorage.getItem("player2") || "PLAYER 2";
+        const p1ImgKey = localStorage.getItem("player1Img") || "player1";
+        const p2ImgKey = localStorage.getItem("player2Img") || "player2";
 
-        const p1 = localStorage.getItem("player1");
-        const p2 = localStorage.getItem("player2");
+        // 名前・写真書き換え
+        const p1nameDisp = document.getElementById("p1name");
+        const p2nameDisp = document.getElementById("p2name");
+        const p1charImgDisp = document.getElementById("p1-char-img");
+        const p2charImgDisp = document.getElementById("p2-char-img");
 
-        if (p1) {
-            document.getElementById("p1name").textContent = p1;
-        }
+        // 名前の反映
+        if (p1nameDisp) p1nameDisp.textContent = p1NameData;
+        if (p2nameDisp) p2nameDisp.textContent = p2NameData;
 
-        if (p2) {
-            document.getElementById("p2name").textContent = p2;
-        }
-
+        // 画像の組み立て➡反映
+        if (p1charImgDisp) p1charImgDisp.src = "img/" + p1ImgKey + ".png";
+        if (p2charImgDisp) p2charImgDisp.src = "img/" + p2ImgKey + ".png";
     });
     </script>
 

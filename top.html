@@ -23,32 +23,74 @@
             <li>相手のHPをゼロにしたプレイヤーの勝利です！</li>
         </ul>
         <div class="PlayerOption">
-            <div>
-                <label>1Pネーム：
-                    <input type="text" id="player1" value="player1"></label>
-                <div>”キャラクター選択画面”</div>
+            <div class="p1-select-area">
+                <label>1Pネーム：<input type="text" id="player1Input" value="player1"></label>
+                <div>キャラクターを選択してください。</div>
+                <div class="player-selector" id="p1-chars">
+                    <img src="img/player1.png" class="player-img selected" data-player="player1">
+                    <img src="img/player2.png" class="player-img" data-player="player2">
+                    <img src="img/player3.png" class="player-img" data-player="player3">
+                    <img src="img/player4.png" class="player-img" data-player="player4">
+                </div>
             </div>
-            <div>
-                <label>2Pネーム：
-                    <input type="text" id="player2" value="player2"></label>
-                <div>”キャラクター選択画面”</div>
+
+            <div class="p2-select-area">
+                <label>2Pネーム：<input type="text" id="player2Input" value="player2"></label>
+                <div>キャラクターを選択してください。</div>
+                <div class="player-selector" id="p2-chars">
+                    <img src="img/player1.png" class="player-img selected" data-player="player1">
+                    <img src="img/player2.png" class="player-img" data-player="player2">
+                    <img src="img/player3.png" class="player-img" data-player="player3">
+                    <img src="img/player4.png" class="player-img" data-player="player4">
+                </div>
             </div>
         </div>
         <button id="startBtn" class="btn">ゲームスタート</button>
     </div>
 
-    <script>
-    document.getElementById("startBtn").addEventListener("click", function(){
+<script>
+        // キャラ選択
+        //　選択➡赤く光る
+        function setupCharSelect(containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
 
-    const p1 = document.getElementById("player1").value;
-    const p2 = document.getElementById("player2").value;
+            const images = container.querySelectorAll(".player-img");
+            images.forEach(img => {
+                img.addEventListener("click", function() {
+                    images.forEach(i => i.classList.remove("selected"));
+                    this.classList.add("selected");
+                });
+            });
+        }
 
-    localStorage.setItem("player1", p1);
-    localStorage.setItem("player2", p2);
+        // 　ページ読み込み時に実行
+        setupCharSelect("p1-chars");
+        setupCharSelect("p2-chars");
 
-    window.location.href = "game.html";
-});
-</script>
+        //　データの保存と画面遷移
+        document.getElementById("startBtn").addEventListener("click", function() {
+            // 要素の取得
+            const p1Input = document.getElementById("player1Input");
+            const p2Input = document.getElementById("player2Input");
+            const p1Selected = document.querySelector("#p1-chars .selected");
+            const p2Selected = document.querySelector("#p2-chars .selected");
+
+            // エラーチェック
+            if (!p1Input || !p2Input || !p1Selected || !p2Selected) {
+                alert("名前の入力とキャラクター選択を完了させてください！");
+                return;
+            }
+
+            // 保存
+            localStorage.setItem("player1", p1Input.value);
+            localStorage.setItem("player2", p2Input.value);
+            localStorage.setItem("player1Img", p1Selected.dataset.player);
+            localStorage.setItem("player2Img", p2Selected.dataset.player);
+
+            window.location.href = "game.html";
+        });
+    </script>
 
 </body>
 </html>
