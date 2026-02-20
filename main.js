@@ -21,7 +21,7 @@ let timerId;
 let turn = 0;   // 0 => 1p, 1 => 2p
 let gap = [ 0, 0 ];   // 5秒との時間差を入れる用
 let p1_hp = 100;
-let p2_hp = 1;
+let p2_hp = 100;
 
 // タイマー更新
 function updateTime() {
