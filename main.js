@@ -125,5 +125,4 @@ function judge(loserId) {
     center = document.getElementById('center');
     center.innerHTML = '<input id="restart" class="btn" type="button" value="もう一戦"><a href="top.html"><input id="quit" class="btn" type="button" value="やめる"></a>';
     restart.addEventListener('click', () => {location.reload()});   //ページを再読み込み
-
 }
