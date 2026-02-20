@@ -21,7 +21,7 @@ let timerId;
 let turn = 0;   // 0 => 1p, 1 => 2p
 let gap = [ 0, 0 ];   // 5秒との時間差を入れる用
 let p1_hp = 100;
-let p2_hp = 1;
+let p2_hp = 100;
 
 // タイマー更新
 function updateTime() {
@@ -105,30 +105,18 @@ stopBtn.addEventListener('click', () => {
     mainDisplay.classList.remove("hidden-timer"); // タイマーを表示状態に戻す
 });
 // ダメージ計算式
-function DMcalc(attackerId, gap, diff) {
-    const time = Math.abs(gap[attackerId]);
-    const opponentError = Math.abs(gap[1 - attackerId]);
-    let damage = 0;
-    // ダメージテーブル
-    if (time === 0) {
-        damage = 80;
-    } 
-    else if (time <= 0.01) {
-        damage = 50;
-    } 
-    else if (time <= 0.05) {
-        damage = 20;
-    } 
-    else if (time <= 1.00) {
-        damage = 15;
-    } 
-    else {
-        damage = 5;
-    }
-    if (Math.abs(time - opponentError) <= 0.01 && time > 0) {
-        return 0;
-    }
-    return damage;
+function DMcalc (attackerIdx, gap, diff) {
+    const a = Math.abs(gap[attackerIdx]);
+    
+    let baseDamage = 40 * Math.pow(0.78, a);
+
+    const advantage = Math.abs(diff);
+    const multiplier = 1 + (Math.min(advantage, 2.0) * 0.25);
+
+    const finalDamage = baseDamage * multiplier * 0.7;
+
+    // 最低ダメージを 5 に設定
+    return Math.max(5, finalDamage);
 }
 // 勝敗判定
 function judge(loserId) {
