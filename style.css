@@ -188,13 +188,14 @@ html {
     border-radius: 10px;
 }
 .commentarea {
+    font-size: 32px;
     text-align: center;
     color: #fff;
     border: solid #919191 10px;
     background-color: #000000;
     border-radius: 50px;
     box-shadow: 0px 10px 10px #00000098;
-    height: 250px;
+    height: 230px;
 }
 .hidden-timer {
     color: transparent !important; /* 文字色を透明にする */
