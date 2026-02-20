@@ -21,7 +21,7 @@ let timerId;
 let turn = 0;   // 0 => 1p, 1 => 2p
 let gap = [ 0, 0 ];   // 5秒との時間差を入れる用
 let p1_hp = 100;
-let p2_hp = 100;
+let p2_hp = 1;
 
 // タイマー更新
 function updateTime() {
@@ -75,24 +75,28 @@ stopBtn.addEventListener('click', () => {
             damage = Number(DMcalc(0, gap, diff).toFixed(0));   // DMcalc関数の戻り値の小数点第一位を四捨五入
             console.log("1p-attack:" + damage + "damage");    //確認用
             p2_hp -= damage;
-            if (p2_hp <= 0) judge(1);
+            
             setTimeout(() => {
                 document.getElementById("p2-hp").style.width = p2_hp + "%"; 
             }, 500); //体力のCSSに反映
-            document.querySelector('#comment1').textContent = "1Pの攻撃！";
-            document.querySelector('#comment2').textContent = "2Pに" + damage + "ダメージ！";
+            document.querySelector('#comment1').textContent = localStorage.getItem("player1") + "の攻撃！";
+            document.querySelector('#comment2').textContent = localStorage.getItem("player2") + "に" + damage + "ダメージ！";
+
+            if (p2_hp <= 0) judge(1);
         }
         else if (diff >= 0) {
             // 2pの攻撃
             damage = Number(DMcalc(1, gap, diff).toFixed(0));
             console.log("2p-attack:" + damage + "damage");
             p1_hp -= damage;
-            if (p1_hp <= 0) judge(0);
+            
             setTimeout(() => {
                 document.getElementById("p1-hp").style.width = p1_hp + "%";
             }, 500);
-            document.querySelector('#comment1').textContent = "2Pの攻撃！";
-            document.querySelector('#comment2').textContent = "1Pに" + damage + "ダメージ！";
+            document.querySelector('#comment1').textContent = localStorage.getItem("player2") + "の攻撃！";
+            document.querySelector('#comment2').textContent = localStorage.getItem("player1") + "に" + damage + "ダメージ！";
+
+            if (p1_hp <= 0) judge(0);
         }
         else {
             // 引き分け
@@ -133,6 +137,13 @@ function DMcalc(attackerId, gap, diff) {
 // 勝敗判定
 function judge(loserId) {
     document.getElementById(`p${++loserId}-hp`).style.width = 0 + "%";
+    if(loserId==1){
+        document.querySelector('#comment1').textContent = "WINNER";
+        document.querySelector('#comment2').textContent = localStorage.getItem("player2");
+    } else {
+        document.querySelector('#comment1').textContent = "WINNER";
+        document.querySelector('#comment2').textContent = localStorage.getItem("player1");
+    }
     document.getElementById("goal-time").textContent = "K.O";
     center = document.getElementById('center');
     center.innerHTML = '<input id="restart" class="btn" type="button" value="もう一戦"><a href="top.html"><input id="quit" class="btn" type="button" value="やめる"></a>';
