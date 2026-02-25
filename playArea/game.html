@@ -33,7 +33,7 @@
         <div class="play-area">
             <div class="player-display">
                 <div id="p1time" class="player_time">00.00</div>
-                <img class="character" src="img/player1.png" alt="">
+                <img id="p1-char-img" class="character" src="../img/player1.png" alt="1Pキャラ">
             </div>
             <div id="center" class="stopwatch">
                 <div id="stopwatch" class="time">00.00</div>
@@ -42,7 +42,7 @@
             </div>
             <div class="player-display">
                 <div id="p2time" class="player_time">00.00</div>
-                <img class="character" src="img/player2.png" alt="">
+                <img id="p2-char-img" class="character" src="../img/player2.png" alt="2Pキャラ">
             </div>
         </div>
     </section>
@@ -50,24 +50,6 @@
         <p id="comment1"></p>
         <p id="comment2"></p>
     </div>
-    
-     <script>
-    document.addEventListener("DOMContentLoaded", function(){
-
-        const p1 = localStorage.getItem("player1");
-        const p2 = localStorage.getItem("player2");
-
-        if (p1) {
-            document.getElementById("p1name").textContent = p1;
-        }
-
-        if (p2) {
-            document.getElementById("p2name").textContent = p2;
-        }
-
-    });
-    </script>
-
     <script src="main.js"></script>
 </body>
 </html>
