@@ -1,0 +1,181 @@
+html {
+    max-width: 1700px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/*ゲーム画面*/
+.background {
+    margin-bottom: 1rem;
+    background: no-repeat url(../img/ringu.jpg) center center;
+    padding: 30px;
+    border: solid #919191 10px;
+    border-radius: 50px;
+    box-shadow: 0px 10px 10px #00000098;
+}
+.play-header {
+    display: flex;
+    justify-content: space-between;
+    height: 9rem;
+    margin-top: 1rem;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 1500px;
+    height: 144px;
+}
+.goal {
+    text-align: center;
+    font-family: "WDXL Lubrifont JP N", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 70px;
+    color: #fff000;
+    margin-top: -4rem;
+    margin-inline: 5px;
+    width: 300px;
+}
+.goal p {
+    padding: 20px;
+    border: solid #919191 10px;
+    background-color: #000000;
+    border-radius: 30px;
+    box-shadow: 0px 10px 10px #00000098;
+}
+.time {
+    font-family: "WDXL Lubrifont JP N", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 70px;
+}
+.p1-area, .p2-area  {
+    width: 40%;
+    min-width: 100px;
+}
+.p1-area {
+    text-align: left;
+    background-color: #cfcfcfe0;
+    border-right: solid #ff23235e 10px;
+    border-bottom: solid #ff23235e 7px;
+    border-bottom-left-radius: 70px;
+    border-top-right-radius: 70px;
+    padding-inline: 2rem;
+    box-shadow: 0px 10px 10px #00000098;
+}
+.p2-area {
+    text-align: right;
+    background-color: #cfcfcfe0;
+    border-left: solid #0000ff5e 10px;
+    border-bottom: solid #0000ff5e 7px;
+    border-bottom-right-radius: 70px;
+    border-top-left-radius: 70px;
+    padding-inline: 2rem;
+    box-shadow: 0px 10px 10px #00000098;
+}
+.HPbar {
+    background: #868686;
+    height: 30px;
+    border: solid #000 3px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+.HPbar div {
+    height: 100%;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+.p1-area .HPbar div{
+    background-color: #ff1515;
+    width: 100%;
+}
+.p2-area .HPbar div{
+    background-color: #3d3dfc;
+    width: 100%;
+}
+.play-area {
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: .5rem;
+    display: flex;
+    justify-content: space-around;
+    height: 50vh;
+    align-items: center;
+}
+.character {
+    max-width: 200px;
+    width: 100%;
+}
+.player-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.stopwatch {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1.5rem;
+    align-items: center;
+    width: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.stopwatch div {
+    text-align: center;
+    background-color: #fff;
+    font-family: "WDXL Lubrifont JP N", sans-serif;
+    font-weight: 450;
+    font-style: normal;
+    font-size: 70px;
+    width: 200px;
+    padding-block: 56px;
+    border-radius: 100%;
+    box-shadow: 0px 2px 15px #00000098;
+}
+.stopwatch button {
+    font-family: "WDXL Lubrifont JP N", sans-serif;
+    margin-top: 1rem;
+    box-shadow: 0px 2px 15px #00000098;
+    width: 300px;
+    height: 100px;
+    border-radius: 200px;
+    border: none;
+    background-color: #fff;
+}
+.stopwatch button:hover {
+    background-color: #dddddd;
+}
+.player_time {
+    font-family: "WDXL Lubrifont JP N", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 70px;
+    font-variant-numeric: tabular-nums;
+    display: inline-block;
+    text-align: center;
+    background-color: #0000009f;
+    color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    
+}
+.commentarea {
+    font-size: 32px;
+    text-align: center;
+    color: #fff;
+    border: solid #919191 10px;
+    background-color: #000000;
+    border-radius: 50px;
+    box-shadow: 0px 10px 10px #00000098;
+    height: 230px;
+}
+.hidden-timer {
+    color: transparent !important; /* 文字色を透明にする */
+    transition: color 0.5s;        /* ふわっと消える効果 */
+}
+.character {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
