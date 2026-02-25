@@ -85,10 +85,12 @@ html {
 }
 .p1-area .HPbar div{
     background-color: #ff1515;
+    box-shadow: inset 0px -4px 5px #0000006b;
     width: 100%;
 }
 .p2-area .HPbar div{
     background-color: #3d3dfc;
+    box-shadow: inset 0px -4px 5px #0000006b;
     width: 100%;
 }
 .play-area {
