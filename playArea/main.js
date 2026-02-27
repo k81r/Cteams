@@ -8,8 +8,24 @@ let startTime;
 let timerId;
 let turn = 0;   // 0 => 1p, 1 => 2p
 let gap = [ 0, 0 ];   // 5秒との時間差を入れる用
-let p1_hp = 100;
-let p2_hp = 100;
+
+let p1Data, p2Data;     // p1、p2のキャラクター情報を対応付ける用
+let p1_hp, p2_hp;
+
+const charMaster = {
+    "c1": { name: "キャラ1", hp: 100, atc: 100, crit:0.0, coolcnt:2, hidden:2000, img: "../img/player1.png" },
+    "c2": { name: "キャラ2", hp: 120, atc: 80,  crit:0.0, coolcnt:2, hidden:1500, img: "../img/player2.png" },
+    "c3": { name: "キャラ3", hp: 80,  atc: 120, crit:0.0, coolcnt:2, hidden:1500, img: "../img/player3.png" },
+    "c4": { name: "キャラ4", hp: 50,  atc: 200, crit:0.0, coolcnt:2, hidden:4000, img: "../img/player4.png" }
+};
+
+function c1skill() {
+    p1Data.atc += 20;
+    p1Data.crit += 0.1; 
+}
+function c2skill() {
+    p1Data.hp += 30;
+}
 
 // タイマー更新
 function updateTime() {
@@ -74,26 +90,29 @@ window.addEventListener("DOMContentLoaded", () => {
     if (p2name) p2name.textContent = player2Name;
 });
 
-document.addEventListener("DOMContentLoaded", function(){
-    // topから選択した写真を取得
-    const p1NameData = localStorage.getItem("player1") || "PLAYER 1";
-    const p2NameData = localStorage.getItem("player2") || "PLAYER 2";
-    const p1ImgKey = localStorage.getItem("player1Img") || "player1";
-    const p2ImgKey = localStorage.getItem("player2Img") || "player2";
-    // 名前・写真書き換え
-    const p1nameDisp = document.getElementById("p1name");
-    const p2nameDisp = document.getElementById("p2name");
-    const p1charImgDisp = document.getElementById("p1-char-img");
-    const p2charImgDisp = document.getElementById("p2-char-img");
-    // 名前の反映
-    if (p1nameDisp) p1nameDisp.textContent = p1NameData;
-    if (p2nameDisp) p2nameDisp.textContent = p2NameData;
-    // 名前の反映
-    if (p1nameDisp) p1nameDisp.textContent = p1NameData;
-    if (p2nameDisp) p2nameDisp.textContent = p2NameData;
-    // 画像の組み立て➡反映
-    if (p1charImgDisp) p1charImgDisp.src = "../img/" + p1ImgKey + ".png";
-    if (p2charImgDisp) p2charImgDisp.src = "../img/" + p2ImgKey + ".png";
+// 画面読み込み時の処理
+document.addEventListener("DOMContentLoaded", function() {
+    
+    // LocalStorageからkeyを取得
+    const p1Key = localStorage.getItem("player1Idx") || "c1"; // 空ならc1に
+    const p2Key = localStorage.getItem("player2Idx") || "c2";
+
+    // データを取り出す
+    p1Data = charMaster[p1Key];
+    p2Data = charMaster[p2Key];
+
+    // 画像と名前を反映
+    document.getElementById("p1name").textContent = p1Data.name;
+    document.getElementById("p2name").textContent = p2Data.name;
+
+    const p1Img = document.getElementById("p1-char-img");
+    const p2Img = document.getElementById("p2-char-img");
+
+    p1Img.src = p1Data.img; // 画像変更
+    p2Img.src = p2Data.img;
+
+    p1_hp = p1Data.hp;
+    p2_hp = p2Data.hp;
 });
 
 // スタートボタン

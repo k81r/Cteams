@@ -10,12 +10,12 @@ html {
     background: no-repeat url(../img/ringu.jpg) center center;
     padding: 30px;
     border: solid #919191 10px;
-    border-radius: 50px;
+    border-radius: 20px;
     box-shadow: 0px 10px 10px #00000098;
 }
 .play-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     height: 9rem;
     margin-top: 1rem;
     margin-right: auto;
@@ -85,12 +85,12 @@ html {
 }
 .p1-area .HPbar div{
     background-color: #ff1515;
-    box-shadow: inset 0px -4px 5px #0000006b;
+    box-shadow: inset 0px -5px 5px #0000006b;
     width: 100%;
 }
 .p2-area .HPbar div{
-    background-color: #3d3dfc;
-    box-shadow: inset 0px -4px 5px #0000006b;
+    background-color: #4848ff;
+    box-shadow: inset 0px -5px 5px #0000006b;
     width: 100%;
 }
 .play-area {

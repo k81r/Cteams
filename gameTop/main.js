@@ -17,8 +17,8 @@ document.getElementById("startBtn").addEventListener("click", function() {
     // 保存
     localStorage.setItem("player1", p1Input.value);
     localStorage.setItem("player2", p2Input.value);
-    localStorage.setItem("player1Img", p1Selected.dataset.player);
-    localStorage.setItem("player2Img", p2Selected.dataset.player);
+    localStorage.setItem("player1Idx", p1Selected.dataset.player);
+    localStorage.setItem("player2Idx", p2Selected.dataset.player);
     window.location.href = "../playArea/game.html";
 });
 
