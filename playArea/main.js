@@ -176,7 +176,60 @@ stopBtn.addEventListener('click', () => {
             // 引き分け
             damage = 0;
         }
-        if(p1_hp <= 0 || p2_hp <= 0) judge(judgeIdx);
+
+        // 勝敗数を記録する変数
+        window.p1_wins = window.p1_wins || 0;
+        window.p2_wins = window.p2_wins || 0;
+
+        //　1PのHPが0になった場合（2Pがラウンド勝利）
+        if(p1_hp <= 0) {
+            document.querySelector('#comment2').textContent = localStorage.getItem("player1") + "を倒した！";
+            setTimeout(() => {
+                document.getElementById("p1-hp").style.width = 0 + "%";
+            }, 500);
+            window.p2_wins++; // 2Pに1勝プラス
+
+            //2勝の判定
+            if (window.p2_wins >= 2) {
+                judge(0); // 1Pが負けた(0)としてゲーム終了処理へ
+            } else {
+                // 次のラウンド　HPをリセット
+                setTimeout(() => {
+                    p1_hp = 100;
+                    p2_hp = 100;
+                    document.getElementById("p1-hp").style.width = "100%";
+                    document.getElementById("p2-hp").style.width = "100%";
+                    
+                    document.querySelector('#comment1').textContent = "ROUND " + (window.p1_wins + window.p2_wins + 1);
+                    document.querySelector('#comment2').textContent = `1P: ${window.p1_wins}勝 / 2P: ${window.p2_wins}勝`;
+                }, 3000);
+            }
+        } 
+        //2PのHPが0になった場合（1Pがラウンド勝利）
+        else if(p2_hp <= 0) {
+            document.querySelector('#comment2').textContent = localStorage.getItem("player2") + "を倒した！";
+            setTimeout(() => {
+                document.getElementById("p2-hp").style.width = 0 + "%";
+            }, 500);
+            window.p1_wins++; // 1Pに1勝プラス
+
+            // 2勝の判定
+            if (window.p1_wins >= 2) {
+                judge(1); // 2Pが負けた(1)としてゲーム終了処理へ
+            } else {
+                // 次のラウンド　HPをリセット
+                setTimeout(() => {
+                    p1_hp = 100;
+                    p2_hp = 100;
+                    document.getElementById("p1-hp").style.width = "100%";
+                    document.getElementById("p2-hp").style.width = "100%";
+                    
+                    document.querySelector('#comment1').textContent = "ROUND " + (window.p1_wins + window.p2_wins + 1);
+                    document.querySelector('#comment2').textContent = `1P: ${window.p1_wins}勝 / 2P: ${window.p2_wins}勝`;
+                }, 3000);
+            }
+        }
+        
         judgeIdx = -1;
     }
         
