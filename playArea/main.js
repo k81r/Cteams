@@ -19,12 +19,16 @@ const charMaster = {
     "c4": { name: "キャラ4", hp: 50,  atc: 200, crit:0.0, coolcnt:2, hidden:4000, img: "../img/player4.png" }
 };
 
-function c1skill() {
-    p1Data.atc += 20;
-    p1Data.crit += 0.1; 
-}
-function c2skill() {
-    p1Data.hp += 30;
+function applySkills() {
+    // キャラ1のスキル: 攻撃力とクリティカル上昇（データ上のatcを書き換え）
+    if (localStorage.getItem("player1Idx") == "c1") {
+        p1Data.atc += 20; 
+        p1Data.crit += 0.1;
+    }
+    // キャラ2のスキル: HP増加（初期HPを増やす）
+    if (localStorage.getItem("player2Idx") == "c2") {
+        p2_hp += 30;
+    }
 }
 
 // タイマー更新
@@ -75,6 +79,37 @@ function judge(loserId) {
     center = document.getElementById('center');
     center.innerHTML = '<input id="restart" class="btn" type="button" value="もう一戦"><a href="../gameTop/index.html"><input id="quit" class="btn" type="button" value="やめる"></a>';
     restart.addEventListener('click', () => {location.reload()});   //ページを再読み込み
+}
+
+// ラウンド終了・勝敗判定の統合
+function processRoundResult(winner) {
+    if (winner == 1) p1_wins++;
+    else p2_wins++;
+
+    const totalWinsNeeded = 2; // 2勝先取
+    const p1Name = localStorage.getItem("player1");
+    const p2Name = localStorage.getItem("player2");
+
+    if (p1_wins >= totalWinsNeeded || p2_wins >= totalWinsNeeded) {
+        // 完全決着
+        judge(p1_wins >= totalWinsNeeded ? 1 : 0);
+    } else {
+        // 次のラウンドへ
+        document.querySelector('#comment2').textContent = `${winner}Pのラウンド勝利！次はROUND ${p1_wins + p2_wins + 1}`;
+        
+        setTimeout(() => {
+            // HPリセット（キャラ固有のHPに戻す）
+            p1_hp = p1Data.hp;
+            p2_hp = p2Data.hp;
+            // キャラ2のスキル再適用（ラウンド毎にHPが増える仕様の場合）
+            applySkills(); 
+
+            document.getElementById("p1-hp").style.width = "100%";
+            document.getElementById("p2-hp").style.width = "100%";
+            document.querySelector('#comment1').textContent = `ROUND ${p1_wins + p2_wins + 1}`;
+            document.querySelector('#comment2').textContent = `${p1Name}: ${p1_wins}勝 / ${p2Name}: ${p2_wins}勝`;
+        }, 2000);
+    }
 }
 
 //name
@@ -141,40 +176,34 @@ stopBtn.addEventListener('click', () => {
     console.log(turn + 1 + "p-side time:"+ record + " gap:" + gap[turn]);
 
     // ダメージ算出
-    let damage;
     if (turn == 1) {
-        diff = Math.abs(gap[0]) - Math.abs(gap[1]);     // どっちの攻撃かを正負で判断
-        if (diff <= 0) {
+        let diff = Math.abs(gap[0]) - Math.abs(gap[1]);     // どっちの攻撃かを正負で判断
+        let damage = 0;
+        let targetHpElement;
+        if (diff < 0) {
             // 1pの攻撃
             damage = Number(DMcalc(0, gap, diff).toFixed(0));   // DMcalc関数の戻り値の小数点第一位を四捨五入
             console.log("1p-attack:" + damage + "damage");    //確認用
             p2_hp -= damage;
-            
-            setTimeout(() => {
-                document.getElementById("p2-hp").style.width = p2_hp + "%"; 
-            }, 500); //体力のCSSに反映
+            targetHpElement = document.getElementById("p2-hp")
             document.querySelector('#comment1').textContent = localStorage.getItem("player1") + "の攻撃！";
             document.querySelector('#comment2').textContent = localStorage.getItem("player2") + "に" + damage + "ダメージ！";
-            
-            judgeIdx = 1;
         }
-        else if (diff >= 0) {
+        else if (diff > 0) {
             // 2pの攻撃
             damage = Number(DMcalc(1, gap, diff).toFixed(0));
             console.log("2p-attack:" + damage + "damage");
             p1_hp -= damage;
-            
-            setTimeout(() => {
-                document.getElementById("p1-hp").style.width = p1_hp + "%";
-            }, 500);
+            targetHpElement = document.getElementById("p1-hp")
             document.querySelector('#comment1').textContent = localStorage.getItem("player2") + "の攻撃！";
             document.querySelector('#comment2').textContent = localStorage.getItem("player1") + "に" + damage + "ダメージ！";
-            
-            judgeIdx = 0;
         }
-        else {
-            // 引き分け
-            damage = 0;
+
+        // HPバー更新
+        if (targetHpElement) {
+            const maxHp = (targetHpElement.id == "p1-hp") ? p1Data.hp : p2Data.hp;
+            const hpPercent = Math.max(0, ( (targetHpElement.id == "p1-hp" ? p1_hp : p2_hp) / maxHp) * 100);
+            setTimeout(() => { targetHpElement.style.width = hpPercent + "%"; }, 500);
         }
 
         // 勝敗数を記録する変数
